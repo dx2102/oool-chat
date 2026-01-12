@@ -12,7 +12,7 @@ Goals:
 - Concise, single-file code
 - Easy to customize with LLMs or check for safety
 - Design:
-  - Consistent layout and color
+  - Consistent layout and color (tailwind)
   - Readable, high-contrast text
 
 ---
@@ -21,18 +21,26 @@ More goals (Done):
 - Streaming output
 - Stop Generation
 - Multi-line input bar
-- Store chat history locally
+- Store chat history locally (IndexedDB)
 - Search bar
-- Markdown rendering
-- Code highlighting
+- Markdown rendering (markdown-it)
+- Code highlighting (highlight.js)
+- Math rendering (katex)
+- Fast CDN loading/caching
 - Copy button
 
 ---
 
 Future goals:
+- Auto-focus
 - Fix CJK characters in markdown
-- Edit message
+- Edit message / Branching
 - List and jump to messages
 - Change API Keys
 - Multiple APIs
 - Presets (system prompts, `temperature`, `top_p`, `max_tokens`)
+
+- Metadata (pricing, token count)
+- Dark Mode
+- Image uploads
+- Code Execution / Artifacts (WebAssembly)
