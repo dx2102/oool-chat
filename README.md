@@ -1,12 +1,12 @@
 # OoolChat
 
-This is a webpage to call LLM APIs. 
+### Try the app online: https://dx2102.github.io/oool-chat/
 
-It provides a clean, fast, and simple baseline for LLM chat interfaces/GUI.
+This is a simple web app to call LLM APIs. 
 
-All the code is in a single html file. 
+It aims to create a clean and fast UI baseline, while remaining a single HTML file.
 
-Simply paste the code into LLMs to check/customize it.
+Simply paste the code into LLMs to safety-check/customize it.
 
 Goals:
 - Concise, single-file code
