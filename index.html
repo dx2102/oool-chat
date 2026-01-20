@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>OoolChat</title>
 
-
   <!-- <script src="https://cdn.tailwindcss.com"></script> -->
   <!-- <script type="module" src="https://cdn.skypack.dev/twind/shim"></script> -->
   <script type="module">
@@ -16,7 +15,7 @@
     // this block should appear before any other type="module" imports to prevent blocking and FOUC
     let tailwindCode = localStorage.getItem('cdn-cache-tailwind');
     if (!tailwindCode) {
-      tailwindCode = await(await fetch('https://cdn.tailwindcss.com')).text();
+      tailwindCode = await(await fetch('https://cdn.tailwindcss.com/3.4.17')).text();
       localStorage.setItem('cdn-cache-tailwind', tailwindCode);
     }
     const elm = document.createElement('script');
@@ -55,7 +54,6 @@
       outline: none;
       box-shadow: none;
     }
-
 
     .scrollbar-hide::-webkit-scrollbar {
       display: none;
@@ -132,51 +130,69 @@
   </style>
 </head>
 
-<body class="text-lg flex h-screen w-screen bg-white font-sans">
+<body class="flex h-dvh bg-white font-sans touch-manipulation">
 
-  <aside class="text-base w-72 flex-shrink-0 py-2 bg-gray-50 border-r border-gray-200 overflow-hidden flex flex-col">
+  <aside class="text-base w-72 flex-shrink-0 pt-2 bg-gray-50 border-r border-gray-200 overflow-hidden flex flex-col">
     <div class="px-2">
-      <button id="newChatBtn" class="w-full py-2 px-3 rounded-lg bg-gray-50 hover:bg-gray-200 focus:outline-none flex">
+      <button id="newChatBtn" class="w-full py-2 px-3 rounded-lg bg-gray-50 hover:bg-gray-200 flex">
         ✏️ New Chat
       </button>
 
       <input type="text" id="searchInput" placeholder="🔎 Search"
-        class="w-full py-2 px-3 rounded-lg bg-gray-50 hover:bg-gray-200 placeholder-black focus:placeholder-gray-600">
+        class="w-full py-2 px-3 rounded-lg bg-gray-50 hover:bg-gray-200 placeholder-black focus:placeholder-gray-600 focus:outline-none">
     </div>
 
-    <div class="ml-4 mt-2 mb-0.5 text-gray-300 select-none">Recent</div>
-    <div id="sessionList" class="px-2 flex-grow overflow-y-scroll ">
-      <!-- sessionList here -->
+    <!-- div for shadow -->
+    <div class="relative min-h-0 flex flex-grow overflow-hidden border-red-500">
+      <div class="px-2 flex-grow overflow-y-scroll">
+        <div class="pl-2 py-0 text-gray-300 select-none">Recent</div>
+        <!-- sessionList here -->
+        <div id="sessionList"></div>
+        <div class="w-fit mx-auto text-2xl py-1">☁️</div>
+      </div>
+      <div class="absolute z-10 bottom-0 w-full h-2 bg-gradient-to-t from-gray-50 to-transparent pointer-events-none"></div>
+    </div>
+    <div class="mx-2 mb-1 flex">
+      <select class="w-full py-2 px-2 rounded-lg bg-gray-50 hover:bg-gray-200 appearance-none flex">
+        <option class="flex" value="none">💡 gemini-3-flash-preview</option>
+      </select>
+      <button id="settingsBtn" title="Settings" class="py-2 px-3 rounded-lg bg-gray-100 hover:bg-gray-200 flex" >⚙️</button>
     </div>
   </aside>
 
-  <div class="flex flex-col flex-grow overflow-hidden relative">
-    <div id="chatHistory" class="px-24 pt-8 pb-36 flex-grow overflow-y-scroll flex flex-col items-stretch gap-2">
-      <!-- chatHistory here -->
+  <!-- main chat area -->
+  <!-- anchor for the input bar -->
+  <div class="text-lg flex-grow overflow-hidden flex relative">
+    <!-- scroll area inside the anchor -->
+    <div class="flex-grow overflow-y-scroll">
+      <!-- do mx-auto -->
+      <div id="chatHistory" class="max-w-6xl mx-auto px-6 md:px-10 lg:px-20 xl:px-28  pt-8 pb-[50vh]  flex flex-col gap-2">
+        <!-- chatHistory here -->
+      </div>
     </div>
 
     <!-- input bar -->
-    <!-- The bottom half of the bar is bg-white, and transparent elsewhere -->
-    <div class="absolute bottom-0 left-0 right-0 flex flex-col-reverse px-24">
-      <!-- The bottom gap is also white. Must not overwrite the shadow of input bar -->
-      <div class="pb-5 bg-white"></div>
+    <div class="max-w-6xl mx-auto px-6 md:px-10 lg:px-20 xl:px-28  absolute bottom-0 left-0 right-0 flex flex-col-reverse">
+      <!-- The bottom gap is bg-white. Must be below the shadow of input bar -->
+      <div class="pb-4 pt-0.5 bg-white"></div>
+      <!-- The top half of the bar, especially the rounded corner, is transparent -->
       <div style="
         background: linear-gradient(
         to bottom, 
         transparent 50%, 
         white 50%
       );">
-        <div class="max-w-4xl mx-auto flex items-center border border-gray-300 rounded-3xl shadow-sm bg-white">
-          <textarea id="userInput" class="flex-grow bg-transparent pl-5 py-3 resize-none outline-none" rows="1"
+        <!-- The textarea. Simply bg-white. -->
+        <div class="flex items-center border border-gray-300 rounded-3xl shadow-sm bg-white">
+          <textarea id="userInput" class="min-w-0 flex-grow bg-transparent pl-5 py-3 resize-none outline-none" rows="1"
             placeholder="Ask me anything"></textarea>
-          <!-- button.self-end: this keeps the button at the bottom when textarea grows -->
+          <!-- self-end keeps the button at the bottom when textarea grows -->
           <button id="runLlmButton"
             class="bg-gray-800 text-white w-9 h-9 rounded-full flex-shrink-0 m-2 self-end flex items-center justify-center transition">
-            ➤
+            ↑
           </button>
         </div>
       </div>
-      
     </div>
   </div>
 
@@ -188,9 +204,10 @@
       const OpenAI = (await import('https://cdn.skypack.dev/openai@6.9.1')).default;
       openai = new OpenAI({
         baseURL: 'https://openrouter.ai/api/v1',
-        apiKey: 'sk-or-v1-_____',
+        apiKey: localStorage.getItem('api-key'),
         dangerouslyAllowBrowser: true
       });
+      window.openai = openai;
     }
     loadOpenAI();
 
@@ -198,9 +215,11 @@
     const chatHistory = document.getElementById('chatHistory');
     const userInput = document.getElementById('userInput');
     const runLlmButton = document.getElementById('runLlmButton');
+
     const sessionList = document.getElementById('sessionList');
     const newChatBtn = document.getElementById('newChatBtn');
     const searchInput = document.getElementById('searchInput');
+    const settingsBtn = document.getElementById('settingsBtn');
 
     let messages = [];
     let currentSessionId = null;
@@ -257,7 +276,7 @@
     // --- IndexedDB Logic ---
     async function initDB() {
       return new Promise((resolve, reject) => {
-        const request = indexedDB.open('ChatDB', 1);
+        const request = indexedDB.open('chat-db', 1);
         request.onupgradeneeded = (event) => {
           const db = event.target.result;
           if (!db.objectStoreNames.contains('sessions')) {
@@ -326,7 +345,16 @@
       });
     }
 
-    // --- UI Logic ---
+    // --- settings ui logic ---
+    settingsBtn.addEventListener('mousedown', () => {
+      const apiKey = prompt('Enter your OpenRouter API Key:');
+      if (apiKey !== null && apiKey.trim() !== '') {
+        localStorage.setItem('api-key', apiKey);
+        openai.apiKey = apiKey;
+      }
+    });
+
+    // --- sidebar ui logic ---
 
     function clearChat() {
       chatHistory.innerHTML = '';
@@ -419,7 +447,7 @@
 
     }
 
-    // --- Interactions ---
+    // --- chat ui logic ---
 
     newChatBtn.onmousedown = createNewChat;
     searchInput.addEventListener('input', renderSidebar);
@@ -453,6 +481,10 @@
         // restore height to 1 line
         userInput.dispatchEvent(new Event('input'));
       }
+    })
+
+    userInput.addEventListener('submit', function (e) {
+      console.log('submit event')
     })
 
     userInput.addEventListener('input', function (e) {
