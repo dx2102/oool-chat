@@ -6,29 +6,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>OoolChat</title>
 
-  <!-- <script src="https://cdn.tailwindcss.com"></script> -->
-  <!-- <script type="module" src="https://cdn.skypack.dev/twind/shim"></script> -->
-  
+  <!-- unocss + css reset -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@unocss/reset@0.60.0/tailwind.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/@unocss/runtime@0.60.0"></script>
+  <style>
+    /* when unocss is ready, it will remove the un-clock. Before that the page is hidden to prevent flashing */
+    [un-cloak] {
+      display: none !important;
+    }
+  </style>
 
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@unocss/reset/tailwind.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/@unocss/runtime"></script>
-  <script type="module">
-    // Tailwind CDN has a 300 second cache max-age which is too short
-    // most other CDNs allow 1 year of caching
-    // we cache tailwind manually in localStorage
-    // this block should appear before any other type="module" imports to prevent blocking and FOUC
-    // let tailwindCode = localStorage.getItem('cdn-cache-tailwind');
-    // if (!tailwindCode) {
-    //   tailwindCode = await(await fetch('https://cdn.tailwindcss.com/3.4.17')).text();
-    //   localStorage.setItem('cdn-cache-tailwind', tailwindCode);
-    // }
-    // const elm = document.createElement('script');
-    // elm.text = tailwindCode;
-    // document.head.appendChild(elm);
-  </script>
-
+  <!-- openai is slow. import later in the background -->
   <!-- <script type="module" src="https://cdn.skypack.dev/openai@6.9.1"></script> -->
 
+  <!-- markdown-it + highlight.js + katex -->
   <script src="https://cdn.jsdelivr.net/npm/markdown-it@14.1.0/dist/markdown-it.min.js"></script>
 
   <script src="https://cdn.jsdelivr.net/npm/highlightjs@9.16.2/highlight.pack.min.js"></script>
@@ -39,13 +30,7 @@
   <script src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/markdown-it-texmath@1.0.0/texmath.min.js"></script>
 
-  <!-- <link rel="icon" href="
-    data:image/svg+xml,
-    <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'>
-        <rect width='100' height='100' fill='%23dbeafe'/>
-        <text x='50' y='72' text-anchor='middle' font-family='ui-sans-serif' font-size='65' fill='black'>Z</text>
-    </svg>
-  "> -->
+  <!-- favicon as emoji -->
   <link rel="icon" href="data:image/svg+xml,
     <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'>
       <text x='0%' y='50%' style='text-anchor:center;dominant-baseline:central;font-size:100px;'>✏️</text>
@@ -68,7 +53,7 @@
       scrollbar-width: none;
     }
 
-    /* .prose means markdown blocks */
+    /* css for markdown blocks (class="prose") */
 
     .prose p,
     .prose pre,
@@ -134,7 +119,7 @@
   </style>
 </head>
 
-<body class="flex h-dvh bg-white font-sans touch-manipulation">
+<body un-cloak class="flex h-dvh bg-white font-sans touch-manipulation">
 
   <aside class="text-base w-72 flex-shrink-0 pt-2 bg-gray-50 border-r border-gray-200 overflow-hidden flex flex-col">
     <div class="px-2">
