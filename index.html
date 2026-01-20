@@ -8,19 +8,23 @@
 
   <!-- <script src="https://cdn.tailwindcss.com"></script> -->
   <!-- <script type="module" src="https://cdn.skypack.dev/twind/shim"></script> -->
+  
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@unocss/reset/tailwind.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/@unocss/runtime"></script>
   <script type="module">
     // Tailwind CDN has a 300 second cache max-age which is too short
     // most other CDNs allow 1 year of caching
     // we cache tailwind manually in localStorage
     // this block should appear before any other type="module" imports to prevent blocking and FOUC
-    let tailwindCode = localStorage.getItem('cdn-cache-tailwind');
-    if (!tailwindCode) {
-      tailwindCode = await(await fetch('https://cdn.tailwindcss.com/3.4.17')).text();
-      localStorage.setItem('cdn-cache-tailwind', tailwindCode);
-    }
-    const elm = document.createElement('script');
-    elm.text = tailwindCode;
-    document.head.appendChild(elm);
+    // let tailwindCode = localStorage.getItem('cdn-cache-tailwind');
+    // if (!tailwindCode) {
+    //   tailwindCode = await(await fetch('https://cdn.tailwindcss.com/3.4.17')).text();
+    //   localStorage.setItem('cdn-cache-tailwind', tailwindCode);
+    // }
+    // const elm = document.createElement('script');
+    // elm.text = tailwindCode;
+    // document.head.appendChild(elm);
   </script>
 
   <!-- <script type="module" src="https://cdn.skypack.dev/openai@6.9.1"></script> -->
