@@ -48,16 +48,20 @@ Main Goals:
 - [ ] Fix CJK characters bolding in markdown
 
 ### 6. Chat management
-- [ ] Stop Generation
+- [ ] Delete / Pin / Rename chat
+- [ ] Stop generation
 - [ ] Edit message
+- [ ] Retry
 - [ ] Branching
 - [ ] Allow parallel generation
 
 ### 7. Settings / Customization
 - [x] Change API Keys
 - [ ] Manage models (api keys, base url, system prompts, temperature, top_p, max_tokens)
-- [ ] Manage appearance (font, color, darkmode preset)
+- [ ] Manage appearance (font, color, padding, darkmode preset)
 - [ ] Shortcut keys
+- [ ] Export data
+- [ ] Delete all images
 
 ### 8. Advanced usage
 - [ ] List and jump to messages
