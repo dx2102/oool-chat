@@ -31,37 +31,37 @@ Todos:
 
 ## 3. Better Utilities
 - [x] Search bar
-- [] Improved search
-- [] Resize / Hide sidebar
+- [ ] Improved search
+- [ ] Resize / Hide sidebar
 
 ## 4. Even Better Utilities
 - [x] Fast CDN loading/caching
 - [x] Auto-scrolling (disabled by default)
-- [] Auto-focus
-- [] Stop Generation
-- [] Memorize scrolling position
+- [ ] Auto-focus
+- [ ] Stop Generation
+- [ ] Memorize scrolling position
 
 ## 5. Even Better Markdown
 - [x] Copy button
-- [] Correct LaTeX Copying
-- [] Support the checklist syntax
+- [ ] Correct LaTeX Copying
+- [ ] Support the checklist syntax
 - [x] Skip CJK "Enter" button in input box 
-- [] Fix CJK characters bolding in markdown
+- [ ] Fix CJK characters bolding in markdown
 
 ## 6. Chat management
-- [] Edit message
-- [] Branching
-- [] Allow parallel generation
+- [ ] Edit message
+- [ ] Branching
+- [ ] Allow parallel generation
 
 ## 7. Settings / Customization
 - [x] Change API Keys
-- [] Manage models (api keys, base url, system prompts, temperature, top_p, max_tokens)
-- [] Manage appearance (font, color, darkmode preset)
-- [] Shortcut keys
+- [ ] Manage models (api keys, base url, system prompts, temperature, top_p, max_tokens)
+- [ ] Manage appearance (font, color, darkmode preset)
+- [ ] Shortcut keys
 
 ## 8. Advanced usage
-- [] List and jump to messages
-- [] Metadata (pricing, token count)
-- [] Image uploads
-- [] Show thinking trace
-- [] Code Execution / Artifacts (WebAssembly)
+- [ ] List and jump to messages
+- [ ] Metadata (pricing, token count)
+- [ ] Image uploads
+- [ ] Show thinking trace
+- [ ] Code Execution / Artifacts (WebAssembly)
