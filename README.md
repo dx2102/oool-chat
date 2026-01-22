@@ -27,18 +27,21 @@ Main Goals:
 - [x] Markdown rendering (markdown-it)
 - [x] Code highlighting (highlight.js)
 - [x] Math rendering (katex)
-- [x] Store chat history locally (IndexedDB)
 
 ### 3. Better Utilities
+- [x] Store chat history locally (IndexedDB)
 - [x] Search bar
-- [ ] Improved search
+- [ ] WebWorker full text search
 - [ ] Resize / Hide sidebar
+- [ ] Responsive UI / Phone support
 
 ### 4. Even Better Utilities
-- [x] Fast CDN loading/caching
+- [x] CDN library caching
+- [x] Load large libraries in the background
 - [x] Auto-scrolling (disabled by default)
 - [ ] Auto-focus
 - [ ] Memorize scrolling position
+- [ ] Command+Click for a new window
 
 ### 5. Even Better Markdown
 - [x] Copy button
@@ -59,13 +62,16 @@ Main Goals:
 - [x] Change API Keys
 - [ ] Manage models (api keys, base url, system prompts, temperature, top_p, max_tokens)
 - [ ] Manage appearance (font, color, padding, darkmode preset)
+- [ ] Slash commands
 - [ ] Shortcut keys
 - [ ] Export data
 - [ ] Delete all images
 
 ### 8. Advanced usage
 - [ ] List and jump to messages
-- [ ] Metadata (pricing, token count)
+- [ ] Metadata (pricing, token count, raw json)
 - [ ] Image uploads
 - [ ] Show thinking trace
-- [ ] Code Execution / Artifacts (WebAssembly)
+- [ ] Code Execution (WebAssembly)
+- [ ] SVG / Mermaid rendering
+- [ ] Print page
