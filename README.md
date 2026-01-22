@@ -38,7 +38,6 @@ Main Goals:
 - [x] Fast CDN loading/caching
 - [x] Auto-scrolling (disabled by default)
 - [ ] Auto-focus
-- [ ] Stop Generation
 - [ ] Memorize scrolling position
 
 ### 5. Even Better Markdown
@@ -49,6 +48,7 @@ Main Goals:
 - [ ] Fix CJK characters bolding in markdown
 
 ### 6. Chat management
+- [ ] Stop Generation
 - [ ] Edit message
 - [ ] Branching
 - [ ] Allow parallel generation
