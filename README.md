@@ -8,7 +8,7 @@ It aims to create a clean and fast UI baseline, while remaining a single HTML fi
 
 Simply paste the code into LLMs to safety-check/customize it.
 
-Goals:
+Main Goals:
 - Concise, single-file code
 - Easy to customize with LLMs or check for safety
 - Design:
@@ -17,32 +17,40 @@ Goals:
 
 ---
 
-More goals (Done):
-- Streaming output
-- Stop Generation
-- Multi-line input bar
-- Store chat history locally (IndexedDB)
-- Search bar
-- Markdown rendering (markdown-it)
-- Code highlighting (highlight.js)
-- Math rendering (katex)
-- Fast CDN loading/caching
-- Copy button
+Todos:
 
----
+## 1. 
 
-Future goals:
-- Auto-focus
-- Fix CJK characters in markdown
-- Edit message / Branching
-- List and jump to messages
-- Change API Keys
-- Multiple APIs
-- Presets (system prompts, `temperature`, `top_p`, `max_tokens`)
+[x] Streaming output
+[x] Multi-line input bar
+[x] Store chat history locally (IndexedDB)
+[x] Search bar
+[x] Markdown rendering (markdown-it)
+[x] Code highlighting (highlight.js)
+[x] Math rendering (katex)
+[x] Fast CDN loading/caching
+[x] Copy button
 
----
+## 2.
 
-- Metadata (pricing, token count)
-- Dark Mode
-- Image uploads
-- Code Execution / Artifacts (WebAssembly)
+[] Auto-focus
+[] Fix CJK characters in markdown
+[] Copy LaTeX
+
+## 3.
+[] Resize / Hide sidebar
+[] Edit message / Branching
+[] Improved search
+[] Stop Generation
+
+## 4.
+[x] Change API Keys
+[] Customize models (api keys, base url, system prompts, temperature, top_p, max_tokens)
+[] Customize appearance (font, color, darkmode preset)
+
+## 5.
+[] List and jump to messages
+[] Metadata (pricing, token count)
+[] Image uploads
+[] Show thinking trace
+[] Code Execution / Artifacts (WebAssembly)
