@@ -116,12 +116,32 @@
       opacity: 1;
       pointer-events: auto;
     }
+
+    .sidebar {
+      resize: horizontal;
+      overflow: auto;
+    }
+
+    @media (max-width: 768px) {
+      .sidebar {
+        position: absolute;
+        z-index: 20;
+        height: 100%;
+        transform: translateX(-100%);
+        transition: transform 0.2s ease;
+      }
+
+      .sidebar-open .sidebar {
+        transform: translateX(0);
+      }
+    }
   </style>
 </head>
 
 <body un-cloak class="flex h-dvh bg-white font-sans touch-manipulation">
 
-  <aside class="text-base w-72 flex-shrink-0 pt-2 bg-gray-50 border-r border-gray-200 overflow-hidden flex flex-col">
+  <aside id="sidebar"
+    class="sidebar text-base w-72 flex-shrink-0 pt-2 bg-gray-50 border-r border-gray-200 overflow-hidden flex flex-col">
     <div class="px-2">
       <button id="newChatBtn" class="w-full py-2 px-3 rounded-lg bg-gray-50 hover:bg-gray-200 flex">
         ✏️ New Chat
@@ -152,6 +172,10 @@
   <!-- main chat area -->
   <!-- anchor for the input bar -->
   <div class="text-lg flex-grow overflow-hidden flex relative">
+    <button id="toggleSidebarBtn"
+      class="md:hidden absolute top-3 left-3 z-10 py-2 px-3 rounded-lg bg-gray-100 hover:bg-gray-200 flex">
+      ☰
+    </button>
     <!-- scroll area inside the anchor -->
     <div class="flex-grow overflow-y-scroll">
       <!-- do mx-auto -->
@@ -209,6 +233,7 @@
     const newChatBtn = document.getElementById('newChatBtn');
     const searchInput = document.getElementById('searchInput');
     const settingsBtn = document.getElementById('settingsBtn');
+    const toggleSidebarBtn = document.getElementById('toggleSidebarBtn');
 
     let messages = [];
     let currentSessionId = null;
@@ -406,13 +431,16 @@
       messages = session.messages || [];
       messages.forEach(msg => appendMessage(msg.role, msg.content, false));
       renderSidebar();
+      focusUserInput();
+      closeSidebarIfMobile();
     }
 
     function createNewChat() {
       currentSessionId = null;
       clearChat();
       renderSidebar();
-      userInput.focus();
+      focusUserInput();
+      closeSidebarIfMobile();
     }
 
     async function renderSidebar() {
@@ -440,6 +468,17 @@
 
     newChatBtn.onmousedown = createNewChat;
     searchInput.addEventListener('input', renderSidebar);
+    toggleSidebarBtn.addEventListener('mousedown', toggleSidebar);
+
+    function toggleSidebar() {
+      document.body.classList.toggle('sidebar-open');
+    }
+
+    function closeSidebarIfMobile() {
+      if (window.matchMedia('(max-width: 768px)').matches) {
+        document.body.classList.remove('sidebar-open');
+      }
+    }
 
 
     async function nextAnimationFrame() {
@@ -487,6 +526,12 @@
 
     runLlmButton.onclick = runLlm;
 
+    function focusUserInput() {
+      if (document.activeElement !== userInput) {
+        userInput.focus({ preventScroll: true });
+      }
+    }
+
     async function runLlm() {
       const text = userInput.value.trim();
       if (!text) return;
@@ -501,18 +546,8 @@
 
       let fullResponse = '';
       try {
-        const stream = await openai.chat.completions.create({
-          messages: messages,
-          model: modelName,
-          stream: true
-        });
-
-        for await (const chunk of stream) {
-          const content = chunk.choices[0]?.delta?.content || '';
-          console.log(content)
-          fullResponse += content;
-          appendMessage('assistant', fullResponse, true);
-        }
+        fullResponse = 'pong';
+        appendMessage('assistant', fullResponse, true);
       } catch (error) {
         fullResponse = `API Error: ${error.message}`;
         appendMessage('assistant', fullResponse, true);
@@ -527,6 +562,7 @@
       runLlmButton.classList.remove('opacity-50');
 
       await saveSessionToDB();
+      closeSidebarIfMobile();
     }
 
     // --- Init ---
@@ -537,6 +573,7 @@
       if (currentSessionId === null) {
         // Initial state does not automatically clear, preserving the default value for demonstration
       }
+      focusUserInput();
     })();
 
   </script>
