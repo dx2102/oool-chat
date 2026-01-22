@@ -40,6 +40,8 @@ Future goals:
 - Multiple APIs
 - Presets (system prompts, `temperature`, `top_p`, `max_tokens`)
 
+---
+
 - Metadata (pricing, token count)
 - Dark Mode
 - Image uploads
