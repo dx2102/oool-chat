@@ -4,7 +4,7 @@
 
 This is a simple web app to call LLM APIs. 
 
-It aims to create a clean and fast UI baseline, while remaining a single HTML file.
+It aims to create a clean and fast UI baseline, while remaining a single-HTML file with vanilla JS.
 
 Simply paste the code into LLMs to safety-check/customize it.
 
