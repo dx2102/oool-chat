@@ -1,6 +1,6 @@
 # OoolChat
 
-### Try the app online: https://dx2102.github.io/oool-chat/
+### Try the app online: https://dx2102.github.io/ooolchat/
 
 This is a simple web app to call LLM APIs. 
 
