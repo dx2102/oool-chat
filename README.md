@@ -39,7 +39,7 @@ Main Goals:
 - [x] CDN library caching
 - [x] Load large libraries in the background
 - [x] Auto-scrolling (disabled by default)
-- [ ] Auto-focus
+- [x] Auto-focus
 - [ ] Memorize scrolling position
 - [ ] Command+Click for a new window
 
@@ -48,7 +48,7 @@ Main Goals:
 - [ ] Correct LaTeX Copying
 - [ ] Support the checklist syntax
 - [x] Skip CJK "Enter" button in input box 
-- [ ] Fix CJK characters bolding in markdown
+- [x] Fix CJK characters bolding in markdown
 
 ### 6. Chat management
 - [ ] Delete / Pin / Rename chat
